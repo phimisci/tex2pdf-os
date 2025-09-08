@@ -1,4 +1,4 @@
-FROM texlive/texlive:latest-small
+FROM texlive/texlive:latest-full
 
 # Install packages
 RUN apt-get update && apt-get install -y \
@@ -29,10 +29,5 @@ COPY csl /app/csl
 
 # Update font cache
 RUN fc-cache -f -v
-
-# Install additional TeX Live packages using tlmgr
-RUN tlmgr install eso-pic quoting ragged2e lastpage wallpaper lineno footmisc 
-RUN tlmgr install academicons biblatex-apa babel microtype upquote footnotehyper
-RUN tlmgr install xurl bookmark orcidlink
 
 ENTRYPOINT ["python3", "/app/tex2pdf.py"]
